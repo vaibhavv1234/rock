@@ -4,25 +4,20 @@ let playerSelection;
 let computerSelection;
 let playerScore = 0;
 let computerScore = 0;
-function playerPrompt() {
-    let playerChoice = prompt("rock, paper or scissors").toLowerCase();
-    while ((playerChoice != "rock") && (playerChoice != "paper") && (playerChoice != "scissors")) {
-        alert("Please enter in a correct value");
-        playerChoice = prompt("rock, paper or scissors");
-    }
-    return playerChoice;
-}
+const rockButton = document.querySelector('#rock')
+const paperButton = document.querySelector('#paper')
+const scissorsButton = document.querySelector('#scissors')
+const container = document.querySelector('.container');
 
 function computerPlay() {
     let options = ["rock", "paper", "scissors"]
     let compChoice = options[Math.floor(Math.random() * 3)];
     return compChoice;
 }
-
-// Get both choices, check to see whether Player or Computer wins, return the outcome.
+const para = document.querySelector("#para")
 function playRound(playerSelection, computerSelection) {
     
-    playerSelection = playerPrompt();
+    
     computerSelection = computerPlay();
 
     if ( (playerSelection === "rock" && computerSelection === "scissors") || 
@@ -42,8 +37,8 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "scissors" && computerSelection === "scissors") ) {
         result = `Its a tie with ${playerSelection}. It's a tie!`;
     }
-
-    return result;
+    container.textContent = `${playerScore} - ${computerScore}`;
+    para.textContent = result;
 }
 
 // Play 5 times, tracking the wins for both players but ignoring ties, then show who the overall winner is.
@@ -56,7 +51,17 @@ function game() {
     : (`You lose, ${playerScore} to ${computerScore}.`);
     console.log(winner);
 }
+rockButton.addEventListener('click', () => {
+    playerSelection = 'rock';
+    console.log(playRound(playerSelection, computerSelection));
+});
+paperButton.addEventListener('click', () => {
+    playerSelection = 'paper';
+    console.log(playRound(playerSelection, computerSelection));
+});
+scissorsButton.addEventListener('click', () => {
+    playerSelection = 'scissors';
+    console.log(playRound(playerSelection, computerSelection));
+});
 
-// Initialise the game and display a farewell message once win conditions are met.
-game();   
-console.log("Game Over! Reload to play again!!!");
+   
