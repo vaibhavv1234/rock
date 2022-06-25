@@ -19,7 +19,18 @@ function playRound(playerSelection, computerSelection) {
     
     
     computerSelection = computerPlay();
-
+    if (playerScore >= 5 || computerScore >= 5) {
+        if (playerScore > computerScore) {
+            para.textContent = `You Won ${playerScore} - ${computerScore}`;
+        }
+        else if (playerScore == computerScore) {
+            para.textContent = `It was a tie between ${playerScore}`;
+        }
+        else {
+            para.textContent = `You lost ${playerScore} - ${computerScore}`
+        }
+        return;
+    }
     if ( (playerSelection === "rock" && computerSelection === "scissors") || 
     (playerSelection === "paper" && computerSelection === "rock") || 
     (playerSelection === "scissors" && computerSelection === "paper") ) {
@@ -39,18 +50,11 @@ function playRound(playerSelection, computerSelection) {
     }
     container.textContent = `${playerScore} - ${computerScore}`;
     para.textContent = result;
+    
 }
 
 // Play 5 times, tracking the wins for both players but ignoring ties, then show who the overall winner is.
-function game() {
-    for (let i = 0; (playerScore + computerScore) < 5; i++) {
-        console.log(playRound(playerSelection, computerSelection));
-        console.log(`The current score is: Player : ${playerScore}, Computer : ${computerScore}.`);
-    }
-    let winner = (playerScore > computerScore) ? (`You won ${playerScore} to ${computerScore}.`)
-    : (`You lose, ${playerScore} to ${computerScore}.`);
-    console.log(winner);
-}
+
 rockButton.addEventListener('click', () => {
     playerSelection = 'rock';
     console.log(playRound(playerSelection, computerSelection));
@@ -64,4 +68,4 @@ scissorsButton.addEventListener('click', () => {
     console.log(playRound(playerSelection, computerSelection));
 });
 
-   
+
