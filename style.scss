@@ -46,6 +46,12 @@ p{
   }
 }
 @media only screen and (max-width: 690px) {
+  .buttons{
+    width: 100%;
+    button{
+      width: 100%;
+    }
+  }
   p{
     visibility: hidden;
   }
